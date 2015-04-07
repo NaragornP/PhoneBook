@@ -7,7 +7,7 @@ var ObjectID = require('mongodb').ObjectID;
 var format = require('util').format;
 var PhoneBook = null;
 /* ======================================= */
-var port = 4000;
+//var port = 4000;
 var express = require('express');
 var app = express();
 app.use(express.static('./public/'));
@@ -54,6 +54,9 @@ app.get('/removePhone/:book_id', function(request, response) {
 MongoClient.connect('mongodb://Naragorn:824687893@kahana.mongohq.com:10071/Naragorn_Work', function(err, db) {
     if (err) throw err;
     PhoneBook = db.collection('PhoneBooks');
-    app.listen(port);
-    console.log("\nhttp://127.0.0.1:" + port + "\n");
+    app.listen(process.env.PORT || 3000, function() {
+        console.log('listening on');
+    });
+    // app.listen(process.env.PORT || 3000);
+    // console.log("\nhttp://127.0.0.1:" + port + "\n");
 });
